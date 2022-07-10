@@ -1,9 +1,11 @@
 # vuestagram
+![image](https://user-images.githubusercontent.com/73049873/178157798-e6bf6831-7a41-4dde-a615-ec02f87c7779.png)
 
 ## Project setup
 ```
 npm install
 npm install mitt
+npm install vue@next
 ```
 
 ### Compiles and hot-reloads for development
