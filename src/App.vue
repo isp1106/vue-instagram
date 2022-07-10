@@ -9,7 +9,6 @@
       </ul>
       <img src="./assets/logo.png" class="logo" />
     </div>
-
     <PostContainer @write="write = $event" :uploadImage="uploadImage" :postdata="postdata" :step="step" />
     <button @click="more" v-if="step === 0">더 보기</button>
     <div class="footer">
@@ -25,6 +24,7 @@
 import PostContainer from './components/PostContainer'
 import postdata from './assets/postdata.js'
 import axios from 'axios'
+import {mapMutations, mapState} from 'vuex'
 
 export default {
   name: 'App',
@@ -35,9 +35,23 @@ export default {
       moreBtn : 0,
       uploadImage : '',
       write: '',
+      selectedFilter:'',
+      카운터 : 0
     }
   },
+  computed: {
+    ...mapState(['name', 'age', 'likes'])
+  },
+  mounted(){
+    this.emitter.on('filterOn', (a)=> {
+      this.selectedFilter = a
+    })
+  },
   methods:{
+    ...mapMutations(['ageChange']),
+    now(){
+      return new Date();
+    },
     publish(){
       let myPost = {
         name: "inseok Park",
@@ -47,7 +61,7 @@ export default {
         date: "May 15",
         liked: false,
         content: this.write,
-        filter: "perpetua",
+        filter: this.selectedFilter
       };
       this.postdata.unshift(myPost);
       this.step = 0;

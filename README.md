@@ -3,6 +3,7 @@
 ## Project setup
 ```
 npm install
+npm install mitt
 ```
 
 ### Compiles and hot-reloads for development

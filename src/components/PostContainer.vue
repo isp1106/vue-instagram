@@ -4,19 +4,15 @@
     </div>
     <!-- 필터선택페이지 -->
     <div v-if="step === 1">
-      <div class="upload-image" :style="`background-image : url(${uploadImage}`"></div>
+      <div :class="`${selectedFilter} upload-image`" :style="`background-image : url(${uploadImage}`"></div>
       <div class="filters">
-        <div class="filter-1"></div>
-        <div class="filter-1"></div>
-        <div class="filter-1"></div>
-        <div class="filter-1"></div>
-        <div class="filter-1"></div>
+        <FilterBox :uploadImage="uploadImage" :Filter="Filter" v-for="Filter in Filters" :key="Filter" />
       </div>
     </div>
 
     <!-- 글작성페이지 -->
     <div v-if="step === 2">
-        <div class="upload-image" :style="`background-image : url(${uploadImage}`"></div>
+        <div :class="`${selectedFilter} upload-image`" :style="`background-image : url(${uploadImage}`"></div>
         <div class="write">
           <textarea @input="$emit('write', $event.target.value)" class="write-box" style="resize: none;">write!</textarea>
       </div>
@@ -25,8 +21,22 @@
 
 <script>
 import PostElement from './PostElement'
+import FilterBox from './FilterBox'
 export default {
   name: 'PostContainer',
+  data(){
+    return{
+      Filters : [ "aden", "_1977", "brannan", "brooklyn", "clarendon", "earlybird", "gingham", "hudson", 
+                "inkwell", "kelvin", "lark", "lofi", "maven", "mayfair", "moon", "nashville", "perpetua", 
+                "reyes", "rise", "slumber", "stinson", "toaster", "valencia", "walden", "willow", "xpro2"],
+                selectedFilter : '',
+      }
+  },
+  mounted(){
+    this.emitter.on('filterOn', (a)=> {
+      this.selectedFilter = a
+    })
+  },
   props:{
     postdata : Array,
     step : Number,
@@ -34,7 +44,8 @@ export default {
   },
   components: {
     PostElement,
-  }
+    FilterBox
+}
 }
 
 
