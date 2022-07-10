@@ -4,8 +4,6 @@
 ## Project setup
 ```
 npm install
-npm install mitt
-npm install vue@next
 ```
 
 ### Compiles and hot-reloads for development
